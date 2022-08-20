@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:spajam_stech/controllers/upload_image_provider.dart';
 import 'package:spajam_stech/networking/storage_client.dart';
 
 class InputScreen extends ConsumerWidget {
@@ -11,6 +12,8 @@ class InputScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final uploadSucceeded = ref.watch(uploadImageProvider) != null;
+    File? selectedImage;
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -32,14 +35,34 @@ class InputScreen extends ConsumerWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: InkWell(
-                    onTap: uploadImage,
-                    child: Container(
-                      decoration: BoxDecoration(border: Border.all()),
-                      height: 140,
-                      child: const Center(child: Text('画像を選択')),
-                    ),
-                  ),
+                  child: uploadSucceeded
+                      ? Image(
+                          height: 140,
+                          image: FileImage(ref.watch(uploadImageProvider)!),
+                        )
+                      : InkWell(
+                          onTap: () async {
+                            selectedImage = await selectImage();
+                            String? imageUrl;
+                            if (selectedImage != null) {
+                              imageUrl = await uploadImage(selectedImage!);
+                            }
+                            if (imageUrl != null) {
+                              ref
+                                  .read(uploadImageProvider.notifier)
+                                  .update((state) => selectedImage);
+                            } else {
+                              ref
+                                  .read(uploadImageProvider.notifier)
+                                  .update((state) => null);
+                            }
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(border: Border.all()),
+                            height: 140,
+                            child: const Center(child: Text('画像を選択')),
+                          ),
+                        ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
@@ -56,22 +79,20 @@ class InputScreen extends ConsumerWidget {
     );
   }
 
-  Future<void> uploadImage() async {
+  Future<File?> selectImage() async {
     final imagePicker = ImagePicker();
-    XFile? image;
-    String imageUrl;
     await Permission.photos.request();
-    final permissionStatus = await Permission.photos.status;
 
-    print('いいかんじ？ ${permissionStatus.isGranted}');
-
-    // if (permissionStatus.isGranted) {
-    image = await imagePicker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      final file = File(image.path);
-      final storageClient = StorageClient();
-      imageUrl = await storageClient.uploadImage(file);
+    final imageXfile = await imagePicker.pickImage(source: ImageSource.gallery);
+    
+    if (imageXfile == null) {
+      return null;
     }
-    // }
+    return File(imageXfile.path);
+  }
+
+  Future<String> uploadImage(File image) {
+    final storageClient = StorageClient();
+    return storageClient.uploadImageAndGetURL(image);
   }
 }

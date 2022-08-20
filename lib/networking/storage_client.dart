@@ -7,14 +7,13 @@ class StorageClient {
 
   final storage = FirebaseStorage.instance;
 
-  Future<String> uploadImage(File image) async {
+  Future<String> uploadImageAndGetURL(File image) async {
     const uuid = Uuid();
     final fileName = uuid.v1();
     final ref = storage.ref();
     final imageRef = ref.child(fileName);
     await imageRef.putFile(image);
     
-    final imageUrl = await imageRef.getDownloadURL();
-    return imageUrl;
+    return imageRef.getDownloadURL();
   }
 }
