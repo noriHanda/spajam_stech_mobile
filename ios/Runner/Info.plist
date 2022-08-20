@@ -45,5 +45,7 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>線香花火の写真の選択に必要です。</string>
 </dict>
 </plist>
