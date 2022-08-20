@@ -31,3 +31,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: AoyagiKouzanFontT
+      fonts:
+        - asset: assets/fonts/AoyagiKouzanTOTF.otf
