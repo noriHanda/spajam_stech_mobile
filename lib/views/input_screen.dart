@@ -5,10 +5,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:spajam_stech/controllers/upload_image_provider.dart';
+import 'package:spajam_stech/models/create_post.dart';
+import 'package:spajam_stech/networking/api_client.dart';
+import 'package:spajam_stech/networking/app_dio.dart';
 import 'package:spajam_stech/networking/storage_client.dart';
 
 class InputScreen extends ConsumerWidget {
-  const InputScreen({super.key});
+  InputScreen({super.key});
+
+  final textProvider = Provider<List<TextEditingController>>((ref) {
+    return [TextEditingController(), TextEditingController()];
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,16 +28,18 @@ class InputScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(32),
             child: Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: TextField(
-                    decoration: InputDecoration(labelText: '名前'),
+                    decoration: const InputDecoration(labelText: '名前'),
+                    controller: ref.watch(textProvider)[0],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: TextField(
-                    decoration: InputDecoration(labelText: '時間'),
+                    decoration: const InputDecoration(labelText: '時間'),
+                    controller: ref.watch(textProvider)[1],
                   ),
                 ),
                 Padding(
@@ -43,19 +52,18 @@ class InputScreen extends ConsumerWidget {
                       : InkWell(
                           onTap: () async {
                             selectedImage = await selectImage();
-                            String? imageUrl;
-                            if (selectedImage != null) {
-                              imageUrl = await uploadImage(selectedImage!);
-                            }
-                            if (imageUrl != null) {
-                              ref
-                                  .read(uploadImageProvider.notifier)
-                                  .update((state) => selectedImage);
-                            } else {
-                              ref
-                                  .read(uploadImageProvider.notifier)
-                                  .update((state) => null);
-                            }
+                            // if (selectedImage != null) {
+                            //   imageUrl = await uploadImage(selectedImage!);
+                            // }
+                            // if (imageUrl != null) {
+                            ref
+                                .read(uploadImageProvider.notifier)
+                                .update((state) => selectedImage);
+                            // } else {
+                            //   ref
+                            //       .read(uploadImageProvider.notifier)
+                            //       .update((state) => null);
+                            // }
                           },
                           child: Container(
                             decoration: BoxDecoration(border: Border.all()),
@@ -67,7 +75,21 @@ class InputScreen extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      final imageUrl =
+                          await uploadImage(ref.read(uploadImageProvider)!);
+                      final dioOptions = ref.read(dioProvider);
+                      final apiClient = ApiClient(client: dioOptions);
+                      final name = ref.read(textProvider)[0];
+                      final time = ref.read(textProvider)[1];
+
+                      final post = CreatePost.createPost(
+                        time: double.parse(time.text),
+                        imageUrl: imageUrl,
+                        name: name.text,
+                      );
+                      await apiClient.createPost(post);
+                    },
                     child: const Text('登録'),
                   ),
                 ),
@@ -84,7 +106,7 @@ class InputScreen extends ConsumerWidget {
     await Permission.photos.request();
 
     final imageXfile = await imagePicker.pickImage(source: ImageSource.gallery);
-    
+
     if (imageXfile == null) {
       return null;
     }
