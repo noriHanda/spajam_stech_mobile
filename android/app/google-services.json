@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "890289712662",
+    "project_id": "senkohanabi-6b670",
+    "storage_bucket": "senkohanabi-6b670.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890289712662:android:649986518c3b400eb6cf37",
+        "android_client_info": {
+          "package_name": "com.norihanda.spajam_stech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "890289712662-sk8slrs4lerdojhvircft8pgmbqpv5ip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMdyQoJjG2UkYf6hpXCVv1XMQopbQxQkg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "890289712662-sk8slrs4lerdojhvircft8pgmbqpv5ip.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
