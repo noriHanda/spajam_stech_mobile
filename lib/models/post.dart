@@ -9,9 +9,9 @@ class Post with _$Post {
     String? id,
     String? name,
     double? time,
-    String? imageUrl,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    @JsonKey(name: 'image_url') String? imageUrl,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
+    @JsonKey(name: 'uodated_at') DateTime? updatedAt,
   }) = _Post;
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);

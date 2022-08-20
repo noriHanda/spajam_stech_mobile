@@ -23,8 +23,11 @@ mixin _$Post {
   String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   double? get time => throw _privateConstructorUsedError;
+  @JsonKey(name: 'image_url')
   String? get imageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'uodated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,9 +43,9 @@ abstract class $PostCopyWith<$Res> {
       {String? id,
       String? name,
       double? time,
-      String? imageUrl,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      @JsonKey(name: 'image_url') String? imageUrl,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'uodated_at') DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -100,9 +103,9 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       {String? id,
       String? name,
       double? time,
-      String? imageUrl,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      @JsonKey(name: 'image_url') String? imageUrl,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'uodated_at') DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -159,9 +162,9 @@ class _$_Post implements _Post {
       {this.id,
       this.name,
       this.time,
-      this.imageUrl,
-      this.createdAt,
-      this.updatedAt});
+      @JsonKey(name: 'image_url') this.imageUrl,
+      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'uodated_at') this.updatedAt});
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
@@ -172,10 +175,13 @@ class _$_Post implements _Post {
   @override
   final double? time;
   @override
+  @JsonKey(name: 'image_url')
   final String? imageUrl;
   @override
+  @JsonKey(name: 'created_at')
   final DateTime? createdAt;
   @override
+  @JsonKey(name: 'uodated_at')
   final DateTime? updatedAt;
 
   @override
@@ -225,9 +231,9 @@ abstract class _Post implements Post {
       {final String? id,
       final String? name,
       final double? time,
-      final String? imageUrl,
-      final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$_Post;
+      @JsonKey(name: 'image_url') final String? imageUrl,
+      @JsonKey(name: 'created_at') final DateTime? createdAt,
+      @JsonKey(name: 'uodated_at') final DateTime? updatedAt}) = _$_Post;
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
@@ -238,10 +244,13 @@ abstract class _Post implements Post {
   @override
   double? get time;
   @override
+  @JsonKey(name: 'image_url')
   String? get imageUrl;
   @override
+  @JsonKey(name: 'created_at')
   DateTime? get createdAt;
   @override
+  @JsonKey(name: 'uodated_at')
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
