@@ -6,7 +6,7 @@ part 'post.g.dart';
 @freezed
 class Post with _$Post {
   factory Post({
-    String? id,
+    int? id,
     String? name,
     double? time,
     @JsonKey(name: 'image_url') String? imageUrl,

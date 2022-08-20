@@ -20,7 +20,7 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Post {
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   double? get time => throw _privateConstructorUsedError;
   @JsonKey(name: 'image_url')
@@ -40,7 +40,7 @@ abstract class $PostCopyWith<$Res> {
   factory $PostCopyWith(Post value, $Res Function(Post) then) =
       _$PostCopyWithImpl<$Res>;
   $Res call(
-      {String? id,
+      {int? id,
       String? name,
       double? time,
       @JsonKey(name: 'image_url') String? imageUrl,
@@ -69,7 +69,7 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -100,7 +100,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       __$$_PostCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id,
+      {int? id,
       String? name,
       double? time,
       @JsonKey(name: 'image_url') String? imageUrl,
@@ -130,7 +130,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -169,7 +169,7 @@ class _$_Post implements _Post {
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
   @override
-  final String? id;
+  final int? id;
   @override
   final String? name;
   @override
@@ -228,7 +228,7 @@ class _$_Post implements _Post {
 
 abstract class _Post implements Post {
   factory _Post(
-      {final String? id,
+      {final int? id,
       final String? name,
       final double? time,
       @JsonKey(name: 'image_url') final String? imageUrl,
@@ -238,7 +238,7 @@ abstract class _Post implements Post {
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
   @override
-  String? get id;
+  int? get id;
   @override
   String? get name;
   @override
