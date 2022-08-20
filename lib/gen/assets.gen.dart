@@ -9,18 +9,26 @@
 
 import 'package:flutter/widgets.dart';
 
-class $AssetsTestImageGen {
-  const $AssetsTestImageGen();
+class $AssetsHanabiGen {
+  const $AssetsHanabiGen();
 
-  /// File path: assets/test_image/testImage.png
-  AssetGenImage get testImage =>
-      const AssetGenImage('assets/test_image/testImage.png');
+  /// File path: assets/hanabi/senkou_hanabi_body.png
+  AssetGenImage get senkouHanabiBody =>
+      const AssetGenImage('assets/hanabi/senkou_hanabi_body.png');
+
+  /// File path: assets/hanabi/senkou_hanabi_handle.png
+  AssetGenImage get senkouHanabiHandle =>
+      const AssetGenImage('assets/hanabi/senkou_hanabi_handle.png');
+
+  /// File path: assets/hanabi/senkou_hanabi_header.png
+  AssetGenImage get senkouHanabiHeader =>
+      const AssetGenImage('assets/hanabi/senkou_hanabi_header.png');
 }
 
 class Assets {
   Assets._();
 
-  static const $AssetsTestImageGen testImage = $AssetsTestImageGen();
+  static const $AssetsHanabiGen hanabi = $AssetsHanabiGen();
 }
 
 class AssetGenImage {
