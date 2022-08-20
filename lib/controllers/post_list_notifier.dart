@@ -11,6 +11,15 @@ class PostListNotifier extends StateNotifier<List<Post>> {
     final apiClient = ApiClient(client: dio);
     state = await apiClient.getPosts();
   }
+
+  String calculateSum() {
+    // ignore: omit_local_variable_types
+    double sum = 0;
+    for (final post in state) {
+      sum += post.time!;
+    }
+    return sum.toStringAsFixed(3);
+  }
 }
 
 final postListProvider =

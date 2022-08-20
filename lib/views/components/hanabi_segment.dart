@@ -17,23 +17,54 @@ class HanabiSegment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 140,
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 64),
+            padding: index == 0
+                ? const EdgeInsets.only(left: 74)
+                : index == maxLength - 1
+                    ? const EdgeInsets.only(left: 16, right: 17)
+                    : const EdgeInsets.only(left: 82, right: 77),
             child: Image.asset(
               index == 0
                   ? Assets.hanabi.senkouHanabiHandle.path
                   : index == maxLength - 1
                       ? Assets.hanabi.senkouHanabiHeader.path
                       : Assets.hanabi.senkouHanabiBody.path,
-              height: 50,
-              fit: BoxFit.fill,
+              height: 140,
+              fit: BoxFit.cover,
             ),
           ),
-          CachedNetworkImage(
-            imageUrl: post.imageUrl!,
+          Column(
+            children: [
+              Expanded(
+                child: CachedNetworkImage(
+                  imageUrl: post.imageUrl!,
+                  height: 100,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  children: [
+                    Text(
+                      post.name == '' ? '名無し花火さん' : post.name!,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontSize: 16,
+                          ),
+                    ),
+                    Text(
+                      '  ${post.time.toString()}秒',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),

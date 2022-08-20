@@ -17,22 +17,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     Future.microtask(() => ref.read(postListProvider.notifier).loadPosts());
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final postList = ref.watch(postListProvider);
+    final sum = ref.watch(postListProvider.notifier).calculateSum();
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: postList.length,
-            itemBuilder: (context, index) => HanabiSegment(
-              index: index,
-              maxLength: postList.length,
-              post: postList[index],
-            ),
+          child: Column(
+            children: [
+              SafeArea(
+                bottom: false,
+                child: Text(
+                  '合計時間',
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Colors.white,
+                        fontSize: 48,
+                      ),
+                ),
+              ),
+              Text('$sum秒'),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: postList.length,
+                itemBuilder: (context, index) => HanabiSegment(
+                  index: index,
+                  maxLength: postList.length,
+                  post: postList[index],
+                ),
+              ),
+            ],
           ),
         ),
       ),
