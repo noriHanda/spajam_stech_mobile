@@ -8,6 +8,7 @@ class AppDio with DioMixin implements Dio {
   AppDio._([BaseOptions? options]) {
     options = BaseOptions(
       baseUrl: 'http://localhost:1323',
+      contentType: Headers.jsonContentType,
       connectTimeout: 30000,
       sendTimeout: 30000,
       receiveTimeout: 30000,

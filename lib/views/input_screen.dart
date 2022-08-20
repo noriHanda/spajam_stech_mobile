@@ -14,14 +14,13 @@ class InputScreen extends ConsumerWidget {
   InputScreen({super.key});
 
   final textProvider = Provider<List<TextEditingController>>((ref) {
-    return [];
+    return [TextEditingController(), TextEditingController()];
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uploadSucceeded = ref.watch(uploadImageProvider) != null;
     File? selectedImage;
-    String? imageUrl;
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -53,18 +52,18 @@ class InputScreen extends ConsumerWidget {
                       : InkWell(
                           onTap: () async {
                             selectedImage = await selectImage();
-                            if (selectedImage != null) {
-                              imageUrl = await uploadImage(selectedImage!);
-                            }
-                            if (imageUrl != null) {
-                              ref
-                                  .read(uploadImageProvider.notifier)
-                                  .update((state) => selectedImage);
-                            } else {
-                              ref
-                                  .read(uploadImageProvider.notifier)
-                                  .update((state) => null);
-                            }
+                            // if (selectedImage != null) {
+                            //   imageUrl = await uploadImage(selectedImage!);
+                            // }
+                            // if (imageUrl != null) {
+                            ref
+                                .read(uploadImageProvider.notifier)
+                                .update((state) => selectedImage);
+                            // } else {
+                            //   ref
+                            //       .read(uploadImageProvider.notifier)
+                            //       .update((state) => null);
+                            // }
                           },
                           child: Container(
                             decoration: BoxDecoration(border: Border.all()),
@@ -77,14 +76,17 @@ class InputScreen extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: ElevatedButton(
                     onPressed: () async {
+                      final imageUrl =
+                          await uploadImage(ref.read(uploadImageProvider)!);
                       final dioOptions = ref.read(dioProvider);
                       final apiClient = ApiClient(client: dioOptions);
                       final name = ref.read(textProvider)[0];
                       final time = ref.read(textProvider)[1];
+
                       final post = CreatePost.createPost(
-                        time: double.parse(time.toString()),
-                        imageUrl: imageUrl.toString(),
-                        name: name.toString(),
+                        time: double.parse(time.text),
+                        imageUrl: imageUrl,
+                        name: name.text,
                       );
                       await apiClient.createPost(post);
                     },
@@ -104,7 +106,7 @@ class InputScreen extends ConsumerWidget {
     await Permission.photos.request();
 
     final imageXfile = await imagePicker.pickImage(source: ImageSource.gallery);
-    
+
     if (imageXfile == null) {
       return null;
     }
