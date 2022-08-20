@@ -14,6 +14,9 @@ class MyApp extends StatelessWidget {
       title: '線香花火',
       theme: ThemeData(
         fontFamily: 'AoyagiKouzanFontT',
+        scaffoldBackgroundColor: const Color(0xff48404E),
+        primaryColor: const Color(0xff000000),
+        
         primarySwatch: Colors.blue,
       ),
       home: const HomeScreen(),
