@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '890289712662',
     projectId: 'senkohanabi-6b670',
     storageBucket: 'senkohanabi-6b670.appspot.com',
-    iosClientId: '890289712662-0gmbpul50cjf7fjuqp9d8hjhgv0f5dt7.apps.googleusercontent.com',
+    iosClientId:
+        '890289712662-0gmbpul50cjf7fjuqp9d8hjhgv0f5dt7.apps.googleusercontent.com',
     iosBundleId: 'com.norihanda.spajamStech',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '890289712662',
     projectId: 'senkohanabi-6b670',
     storageBucket: 'senkohanabi-6b670.appspot.com',
-    iosClientId: '890289712662-0gmbpul50cjf7fjuqp9d8hjhgv0f5dt7.apps.googleusercontent.com',
+    iosClientId:
+        '890289712662-0gmbpul50cjf7fjuqp9d8hjhgv0f5dt7.apps.googleusercontent.com',
     iosBundleId: 'com.norihanda.spajamStech',
   );
 }
