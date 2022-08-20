@@ -12,11 +12,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
-  final storageClient = StorageClient();
-  final file = File(Assets.testImage.testImage.path);
-  final url = await storageClient.uploadImage(file);
-  print('ダウンロードURL: $url');
   runApp(const MyApp());
 }
 
