@@ -1,0 +1,13 @@
+{
+	"recommendations": [
+		"ricardo-emerson.flutter-development-extensions-pack",
+		"robert-brunhage.flutter-riverpod-snippets",
+		"github.copilot",
+		"github.vscode-pull-request-github",
+		"ms-vsliveshare.vsliveshare-pack",
+		"redhat.vscode-yaml",
+		"davidwoo.flutter-auto-import",
+		"davidanson.vscode-markdownlint"
+	],
+	"unwantedRecommendations": []
+}
