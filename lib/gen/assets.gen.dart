@@ -12,6 +12,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsHanabiGen {
   const $AssetsHanabiGen();
 
+  /// File path: assets/hanabi/icon.png
+  AssetGenImage get icon => const AssetGenImage('assets/hanabi/icon.png');
+
   /// File path: assets/hanabi/senkou_hanabi_body.png
   AssetGenImage get senkouHanabiBody =>
       const AssetGenImage('assets/hanabi/senkou_hanabi_body.png');

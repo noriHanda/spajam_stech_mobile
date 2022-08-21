@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spajam_stech/controllers/post_list_notifier.dart';
+import 'package:spajam_stech/gen/assets.gen.dart';
 import 'package:spajam_stech/views/components/hanabi_segment.dart';
 import 'package:spajam_stech/views/input_screen.dart';
 
@@ -57,11 +58,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           Navigator.push<Object?>(
             context,
             MaterialPageRoute<Object?>(
-              builder: (context) => InputScreen(),
+              builder: (context) => const InputScreen(),
             ),
           );
         },
-        child: const Icon(Icons.add),
+        child: ImageIcon(AssetImage(Assets.hanabi.icon.path)),
       ),
     );
   }

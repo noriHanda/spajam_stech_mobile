@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'AoyagiKouzanFontT',
         scaffoldBackgroundColor: const Color(0xff48404E),
-        primaryColor: const Color(0xff000000),
+        primaryColor: const Color(0xff48404E),
         textTheme: textTheme,
         primarySwatch: Colors.amber,
       ),
