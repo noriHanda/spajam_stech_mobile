@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:spajam_stech/controllers/post_list_notifier.dart';
 import 'package:spajam_stech/controllers/upload_image_provider.dart';
 import 'package:spajam_stech/models/create_post.dart';
 import 'package:spajam_stech/networking/api_client.dart';
@@ -29,6 +30,7 @@ class _InputScreenState extends ConsumerState<InputScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        title: const Text('今回の花火成績'),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -57,7 +59,7 @@ class _InputScreenState extends ConsumerState<InputScreen> {
                     style: const TextStyle(fontSize: 24, color: Colors.white),
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
-                      labelText: '時間',
+                      labelText: '時間（秒）',
                       labelStyle: TextStyle(
                         fontSize: 24,
                         color: Colors.white,
@@ -67,7 +69,7 @@ class _InputScreenState extends ConsumerState<InputScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.only(top: 32),
                   child: uploadSucceeded
                       ? Image(
                           height: 140,
@@ -80,15 +82,12 @@ class _InputScreenState extends ConsumerState<InputScreen> {
                                 .read(uploadImageProvider.notifier)
                                 .update((state) => selectedImage);
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 32),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white),
-                              ),
-                              height: 140,
-                              child: const Center(child: Text('画像を選択')),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
                             ),
+                            height: 140,
+                            child: const Center(child: Text('画像を選択')),
                           ),
                         ),
                 ),
@@ -108,7 +107,11 @@ class _InputScreenState extends ConsumerState<InputScreen> {
                         imageUrl: imageUrl,
                         name: name.text,
                       );
+                      ref
+                          .read(uploadImageProvider.notifier)
+                          .update((state) => null);
                       await apiClient.createPost(post);
+                      await ref.read(postListProvider.notifier).loadPosts();
                       if (!mounted) {
                         return;
                       }

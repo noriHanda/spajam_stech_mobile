@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 import 'package:spajam_stech/gen/assets.gen.dart';
 import 'package:spajam_stech/models/post.dart';
 
@@ -26,14 +27,17 @@ class HanabiSegment extends StatelessWidget {
                 : index == maxLength - 1
                     ? const EdgeInsets.only(left: 16, right: 17)
                     : const EdgeInsets.only(left: 82, right: 77),
-            child: Image.asset(
-              index == 0
-                  ? Assets.hanabi.senkouHanabiHandle.path
-                  : index == maxLength - 1
-                      ? Assets.hanabi.senkouHanabiHeader.path
-                      : Assets.hanabi.senkouHanabiBody.path,
-              height: 140,
-              fit: BoxFit.cover,
+            child: SimpleShadow(
+              offset: const Offset(30, 30),
+              child: Image.asset(
+                index == 0
+                    ? Assets.hanabi.senkouHanabiHandle.path
+                    : index == maxLength - 1
+                        ? Assets.hanabi.senkouHanabiHeader.path
+                        : Assets.hanabi.senkouHanabiBody.path,
+                height: 140,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Column(
